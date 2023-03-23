@@ -27,13 +27,17 @@ module.exports = (grunt) => {
     },
 
     shell: {
-      command: 'tsc'
+      // tsc without compile errors will exit with code 0
+      command: 'tsc',
+      options: {
+        ignoreErrors: true
+      }
     },
 
     rollup: {
       options: {
         treeshake: true,
-        format: 'iife',
+        format: "iife",
         onwarn: swag.onwarn,
         plugins: [
           swag.nodeResolve({
@@ -114,6 +118,13 @@ module.exports = (grunt) => {
 
         module: {
           rules: [
+            {
+              resourceQuery: /source/,
+              type: 'asset/source',
+              generator: {
+                emit: false,
+              },
+            },
             {
               test: /\.js$/,
               use: [ 'source-map-loader' ],

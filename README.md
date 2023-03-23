@@ -14,9 +14,19 @@
 
 ```html
 <span class="mce-varsub">
+  ...
   <span class="mce-varsub-start">{{</span>
     .FirstName
   <span class="mce-varsub-end">}}</span>
+  ...
+</span>
+```
+
+```html
+<span class="mce-varsub" data-mce-cef-wrappable="true" data-mce-varsub="1" contenteditable="false">
+  <span class="mce-varsub-start" data-mce-varsub-start="">{{</span>
+    Client.LastCallDate
+  <span class="mce-varsub-end" data-mce-varsub-end="">}}</span>
 </span>
 ```
 
@@ -30,17 +40,19 @@ tinymce.init({
   toolbar: 'varsub',
 
   // varsub options
-  varsub_start: '{{',
-  varsub_end: '}}',
-  varsub_variables: [{
-    title: 'First Name',
-    value: '.FirstName',
-  }, {
-    title: 'Learners',
-    menu: [{
+  varsub: {
+    start: '{{',
+    end: '}}',
+    variables: [{
       title: 'First Name',
-      value: '.FirstName'
+      value: '.FirstName',
+    }, {
+      title: 'Learners',
+      menu: [{
+        title: 'First Name',
+        value: '.FirstName'
+      }]
     }]
-  }]
+  }
 });
 ```
