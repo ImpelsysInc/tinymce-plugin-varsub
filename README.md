@@ -13,20 +13,12 @@
 **The HTML structure for the Variable Substitution (`varsub`) is as follow:**
 
 ```html
-<span class="mce-varsub">
-  ...
-  <span class="mce-varsub-start">{{</span>
-    .FirstName
-  <span class="mce-varsub-end">}}</span>
-  ...
-</span>
-```
-
-```html
-<span class="mce-varsub" data-mce-cef-wrappable="true" data-mce-varsub="1" contenteditable="false">
-  <span class="mce-varsub-start" data-mce-varsub-start="">{{</span>
-    Client.LastCallDate
-  <span class="mce-varsub-end" data-mce-varsub-end="">}}</span>
+<span class="varsub" contenteditable="false" data-mce-cef-wrappable="true" data-varsub="1"
+      data-varsub-example="Abhisek Pattnaik" data-mce-selected="1">
+  <span class="varsub-start" data-varsub-start="{{">{{</span>
+  <span class="varsub-var" data-varsub-var=".LearnerName"
+        data-varsub-example="Abhisek Pattnaik">.LearnerName</span>
+  <span class="varsub-end" data-varsub-end="}}">}}</span>
 </span>
 ```
 
@@ -44,14 +36,27 @@ tinymce.init({
     start: '{{',
     end: '}}',
     variables: [{
-      title: 'First Name',
-      value: '.FirstName',
-    }, {
-      title: 'Learners',
-      menu: [{
-        title: 'First Name',
-        value: '.FirstName'
-      }]
+      code: "Secondary Email",
+      example: "secondaryEmail@example.com",
+      items: [
+        {
+          example: 1,
+          code: ".Number"
+        },
+        SEPARATOR,
+        {
+          code: ".FirstName",
+          label: "First Name",
+          example: ["Abhisek", "Ashik"]
+        },
+        NewSeparator("First Name"),
+        {
+          code: ".LastName",
+          label: "Last Name",
+          example: ["Pattnaik", "Kumar"]
+        },
+        "SEPARATOR",
+      ],
     }]
   }
 });
