@@ -44,6 +44,10 @@ const setup = (editor: Editor, url: string): void => {
 
   const varsubOptions: Root = editor.options.get("varsub");
 
+  if (!varsubOptions?.variables?.length) {
+    return
+  }
+
   //To add a simple triangle icon:
   editor.ui.registry.addIcon('varsub', varsubIcon);
 
@@ -189,17 +193,6 @@ const setup = (editor: Editor, url: string): void => {
       placeholder: "Filter variables",
     },
     fetch(cb, ctx) {
-      /* cb([{
-         type: "menuitem",
-         text: "Insert Variable",
-         icon: "varsub",
-         onAction: () => {
-           const varNode = createVarNode("variableValue");
-           const serialized = serializeNodeToString(varNode);
-           editor.insertContent(serialized);
-         },
-         enabled: true,
-       }])*/
       if (!ctx.pattern) {
         cb(buildMenu(varsubOptions.variables, { withSeparator: true }))
         return;
