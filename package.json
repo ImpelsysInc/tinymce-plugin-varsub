@@ -1,6 +1,6 @@
 {
   "name": "varsub",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Variable Substitution",
   "scripts": {
     "prepublishOnly": "yarn lint && yarn build",
