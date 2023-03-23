@@ -67,3 +67,5 @@ tinymce.init({
   }
 });
 ```
+
+![varsub](./varsub%20plugin%202023-03-23%2019-47.gif)
