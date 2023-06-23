@@ -72,7 +72,6 @@ const setup = (editor: Editor, url: string): void => {
         onAction: () => {
           const varNode = createVarNode(item.code, getExample(item.example));
           const serialized = serializeNodeToString(varNode);
-          console.log(serialized)
           editor.insertContent(serialized);
         },
         enabled: true,
@@ -123,39 +122,36 @@ const setup = (editor: Editor, url: string): void => {
   }
 
   const createVarNode = (varVal: string, example?: any) => {
-    // <span class="varsub" data-varsub="1" contenteditorable="false" data-mce-cef-wrappable="true">
-    // </span>
-    const varWrapperNode = tinymce.html.Node.create("span", {
+    // <span class="varsub" data-varsub="1" contenteditorable="false" data-mce-cef-wrappable="true"></span>
+    /* const varWrapperNode = tinymce.html.Node.create("span", {
       class: "varsub",
       contenteditable: "false",
       "data-mce-cef-wrappable": "true",
       "data-varsub": "1",
       "data-varsub-example": String(example) || "",
-    });
+    }); */
 
-    //   <span data-varsub-start="{{" class="varsub-start">
-    //   </span>
-    const varStartNode = tinymce.html.Node.create("span", {
+    // <span data-varsub-start="{{" class="varsub-start"></span>
+    /* const varStartNode = tinymce.html.Node.create("span", {
       class: "varsub-start",
       "data-varsub-start": varsubOptions.start,
-    });
+    }); */
 
     // <span data-varsub-start="{{" class="varsub-start">{{</span>
-    const varStartTextNode = tinymce.html.Node.create("#text")
+    /* const varStartTextNode = tinymce.html.Node.create("#text")
     varStartTextNode.value = varsubOptions.start
-    varStartNode.append(varStartTextNode)
+    varStartNode.append(varStartTextNode) */
 
-    // <span data-varsub-end="}}" class="varsub-end">
-    // </span>
-    const varEndNode = tinymce.html.Node.create("span", {
+    // <span data-varsub-end="}}" class="varsub-end"></span>
+    /* const varEndNode = tinymce.html.Node.create("span", {
       class: "varsub-end",
       "data-varsub-end": varsubOptions.end,
-    })
+    }) */
 
     // <span data-varsub-end="}}" class="varsub-end">}}</span>
-    const varEndTextNode = tinymce.html.Node.create("#text")
+    /* const varEndTextNode = tinymce.html.Node.create("#text")
     varEndTextNode.value = varsubOptions.end
-    varEndNode.append(varEndTextNode)
+    varEndNode.append(varEndTextNode) */
 
     // <span data-varsub-var="variableValue">varsub</span>
     const varNode = tinymce.html.Node.create("span", {
@@ -166,20 +162,20 @@ const setup = (editor: Editor, url: string): void => {
 
     // <span data-varsub-var="variableValue">variableValue</span>
     const varTextNode = tinymce.html.Node.create("#text")
-    varTextNode.value = varVal
+    varTextNode.value = varsubOptions.start + varVal + varsubOptions.end
     varNode.append(varTextNode)
 
-    // <span class="varsub" data-varsub="1" contenteditorable="false" data-mce-cef-wrappable="true">
-    //   <span data-varsub-start="{{" class="varsub-start">{{</span>
-    //   <span data-varsub-var="variableValue">variableValue</span>
-    //   <span data-varsub-end="}}" class="varsub-end">}}</span>
-    // </span>
+    /*<span class="varsub" data-varsub="1" contenteditorable="false" data-mce-cef-wrappable="true">
+      <span data-varsub-start="{{" class="varsub-start">{{</span>
+      <span data-varsub-var="variableValue">variableValue</span>
+      <span data-varsub-end="}}" class="varsub-end">}}</span>
+    </span> */
 
-    varWrapperNode.append(varStartNode)
+    /* varWrapperNode.append(varStartNode)
     varWrapperNode.append(varNode)
-    varWrapperNode.append(varEndNode)
+    varWrapperNode.append(varEndNode) */
 
-    return varWrapperNode;
+    return varNode;
   };
 
   const serializeNodeToString = (node: AstNode) => tinymce.html.Serializer().serialize(node);
